@@ -53,7 +53,7 @@
 </script>
 <body class="text-center">
 <main class="form-signin w-100 m-auto">
-    <form action="/join" method="post">
+    <form name="join_form" action="/join" method="post">
         <img class="mb-4" src="../../../resources/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"
              onclick="location.href='/'">
         <h1 class="h3 mb-3 fw-normal">Please join in</h1>
@@ -62,18 +62,49 @@
             <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
             <label for="email">Email address</label>
             <button class="btn btn-light rounded-pill px-3" type="button" onclick="checkEmail()">Duplicate check</button>
+            <span id="id-check"></span>
         </div>
         <div class="form-floating">
             <input type="password" class="form-control" name="password" id="password" placeholder="Password">
             <label for="password">Password</label>
         </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" name="passwordConfirm" id="passwordConfirm" placeholder="passwordConfirm">
+            <label for="passwordConfirm">passwordConfirm</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" name="name" id="name" placeholder="name">
+            <label for="name">name</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" name="nickname" id="nickname" placeholder="nickname">
+            <label for="nickname">nickname</label>
+            <span id="nickname-check"></span>
+
+        </div>
+        <div class="form-floating">
+            <div class="form-check">
+                <input id="men" name="mfCode"  value="M" type="radio" class="form-check-input" checked>
+                <label class="form-check-label" for="men">Men</label>
+            </div>
+            <div class="form-check">
+                <input id="female" name="mfCode" value="F" type="radio" class="form-check-input">
+                <label class="form-check-label" for="female">Female</label>
+            </div>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" name="cellNo" id="cellNo" placeholder="cellNo">
+            <label for="cellNo">cellNo</label>
+        </div>
+
+
 
         <div class="checkbox mb-3">
             <label>
                 <input type="checkbox" value="remember-me"> Remember me
             </label>
         </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        <button class="w-100 btn btn-lg btn-primary" type="button" onclick="joinform_check()" >Sign in</button>
     </form>
 </main>
 

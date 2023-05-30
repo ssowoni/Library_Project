@@ -9,19 +9,24 @@
         select *
         from member
         where email = #{email}
+
     </select>
 
-    <insert id="insert" >
-        INSERT INTO MEMBER(email, password, name, nickname, mfCode, cellNo)
-        values (
-                    email = #{email},
-                    password = #{password},
-                    name = #{name},
-                    nickname = #{nickname},
-                    mfCode = #{mfCode},
-                    cellNo = #{cellNo}
-               )
+    <select id="duplicationCheck" resultType="MemberVO">
+        select *
+        from member
+        where email = #{email}
+            or nickname = #{nickname}
+
+    </select>
+
+
+    <insert id="insert">
+
+        insert into member(email, password, name, nickname, mfCode, cellNo)
+        values (#{email}, #{password}, #{name}, #{nickname}, #{mfCode}, #{cellNo})
 
     </insert>
+
 
 </mapper>

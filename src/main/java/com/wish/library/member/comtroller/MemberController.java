@@ -21,12 +21,24 @@ public class MemberController {
         return "/member/login";
     }
 
-    @PostMapping("/login")
-    //pw는 필수값이 아니다. ( 회원가입할 때 id 중복 체크도 하기 위해서)
-    public String login(@RequestParam("email") String email, @RequestParam(value = "password", required = false) String pw
+    /*@PostMapping("/login")
+    public String login(@RequestParam("email") String email, @RequestParam(value = "password") String pw
                         , HttpSession session){
 
         MemberVO loginMember = service.login(email, pw);
+        log.info("==========loginMember={}", loginMember);
+        if(loginMember == null){
+            return "redirect:/login";
+        }
+        session.setAttribute("nickname", loginMember.getNickname());
+        //redirect는 경로로 설정
+        return "redirect:/";
+    }*/
+
+     @PostMapping("/login")
+    public String login(@RequestParam("email") String email, String password , HttpSession session){
+
+        MemberVO loginMember = service.login(email, password);
         log.info("==========loginMember={}", loginMember);
         if(loginMember == null){
             return "redirect:/login";
@@ -55,6 +67,18 @@ public class MemberController {
         log.info("==========joinMember={}", member);
         service.join(member);
         return "redirect:/login";
+    }
+
+    @GetMapping("/duplicationCheck")
+    @ResponseBody
+    public int duplicationCheck(MemberVO member){
+        MemberVO findMember = service.check(member);
+        if(findMember == null){
+            //사용자가 입력한 이메일과 동일한 이메일 or 닉네임이 없는 경우.
+            return 0;
+        }
+        //이메일이나 닉네임이 있는경우
+        return  1;
     }
 
 
