@@ -69,12 +69,20 @@ public class MemberController {
         return "redirect:/login";
     }
 
+    /**
+     *    ? 이메일 중복 체크면 이메일, 닉네임 중복 체크면 닉네임 이렇게 하나의 값만 받는데
+     *    MemberVO를 파라미터로 받는게 맞을지
+     *    아니면 이메일 체크, 닉네임 체크 메서드를 2개 만들어서 각각 파라미터 하나씩 받고 쿼리도 각각 만드는 게 좋을지...
+     */
     @GetMapping("/duplicationCheck")
     @ResponseBody
     public int duplicationCheck(MemberVO member){
+        log.info("==========duplication Check member={}", member);
+
         MemberVO findMember = service.check(member);
         if(findMember == null){
             //사용자가 입력한 이메일과 동일한 이메일 or 닉네임이 없는 경우.
+            //조회된 값이 0이라는 의미.
             return 0;
         }
         //이메일이나 닉네임이 있는경우

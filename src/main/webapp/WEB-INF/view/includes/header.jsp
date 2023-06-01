@@ -15,7 +15,7 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
 
-    <link href="/resources/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
 
@@ -50,7 +50,7 @@
 
 
     <!-- Custom styles for this template -->
-    <link href="../../resources/assets/dist/css/headers.css" rel="stylesheet">
+    <link href="assets/dist/css/headers.css" rel="stylesheet">
 
 
 </head>
@@ -96,11 +96,13 @@
                     <c:choose>
                         <c:when test="${sessionScope.nickname eq null}">
                             <button type="button" class="btn btn-outline-light me-2" onclick="location.href='/login'">Login</button>
-                            <button type="button" class="btn btn-warning">Sign-up</button>
+                            <button type="button" class="btn btn-warning" onclick="location.href='/join'">Sign-up</button>
                         </c:when>
                         <c:otherwise>
                             ${nickname}님
-                            <button type="button" class="btn btn-outline-light me-2" onclick="location.href='/logout'">Logout</button>
+                            <form action="/logout" method="post">
+                                <button type="submit" class="btn btn-outline-light me-2" >Logout</button>
+                            </form>
                         </c:otherwise>
                     </c:choose>
 
@@ -114,6 +116,6 @@
 </main>
 
 
-<script src="/resources/assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 

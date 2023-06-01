@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script type="text/javascript" src="../../../resources/assets/dist/js/memberJoinValidation.js"></script>
+
 
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
@@ -16,9 +15,12 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
 
-    <link href="../../../resources/assets/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="../../../resources/assets/dist/css/sign-in.css" rel="stylesheet">
+    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/dist/css/sign-in.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/dist/commonAjax.js"></script>
+    <script type="text/javascript" src="assets/dist/js/memberJoinValidation.js"></script>
 
     <style>
 
@@ -54,14 +56,12 @@
 <body class="text-center">
 <main class="form-signin w-100 m-auto">
     <form name="join_form" action="/join" method="post">
-        <img class="mb-4" src="../../../resources/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"
+        <img class="mb-4" src="assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"
              onclick="location.href='/'">
         <h1 class="h3 mb-3 fw-normal">Please join in</h1>
-
         <div class="form-floating">
             <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
-            <label for="email">Email address</label>
-            <button class="btn btn-light rounded-pill px-3" type="button" onclick="checkEmail()">Duplicate check</button>
+            <label for="email">Email address</label><button class="btn btn-light rounded-pill px-3" type="button" name="btn" id="btnEmailCheck">Duplicate check</button>
             <span id="id-check"></span>
         </div>
         <div class="form-floating">
@@ -79,6 +79,7 @@
         <div class="form-floating">
             <input type="text" class="form-control" name="nickname" id="nickname" placeholder="nickname">
             <label for="nickname">nickname</label>
+            <button class="btn btn-light rounded-pill px-3" type="button" name="btn" id="btnNicknameCheck">Duplicate check</button>
             <span id="nickname-check"></span>
 
         </div>
@@ -104,7 +105,8 @@
                 <input type="checkbox" value="remember-me"> Remember me
             </label>
         </div>
-        <button class="w-100 btn btn-lg btn-primary" type="button" onclick="joinform_check()" >Sign in</button>
+        <button class="w-50 btn btn-lg btn-dark" type="button" onclick="history.back();" >이전페이지로가기</button>
+        <button class="w-50 btn btn-lg btn-primary" type="button" name="btn" id="btnJoin" >Sign up</button>
     </form>
 </main>
 
