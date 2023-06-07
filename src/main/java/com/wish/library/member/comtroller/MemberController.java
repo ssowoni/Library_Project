@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 
@@ -62,12 +63,34 @@ public class MemberController {
     }
 
     @PostMapping("/join")
-    public String join(@ModelAttribute MemberVO member){
+    public String join(@ModelAttribute MemberVO member,  RedirectAttributes rttr){
 
         log.info("==========joinMember={}", member);
-        service.join(member);
+        if( service.join(member)){
+            rttr.addFlashAttribute("result", "회원 가입 완료");
+        };
         return "redirect:/login";
     }
+
+    //회원 정보를 수정하려면 회원 아이디를 넘겨 받아야됨.
+    @GetMapping("/modify")
+    public String modifyForm() {
+        //service.check();
+         return "/member/modify";
+     }
+
+    @PostMapping("/modify")
+    public String modify(@ModelAttribute MemberVO member, RedirectAttributes rttr){
+        log.info("==========modifyMmeber={}", member);
+        if(service.modify(member)){
+            rttr.addFlashAttribute("result", "회원 정보 수정 완료");
+        };
+
+        return "redirect:/";
+    }
+
+
+
 
     /**
      *    ? 이메일 중복 체크면 이메일, 닉네임 중복 체크면 닉네임 이렇게 하나의 값만 받는데

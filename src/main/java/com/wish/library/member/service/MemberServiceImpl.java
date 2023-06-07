@@ -53,15 +53,20 @@ public class MemberServiceImpl implements MemberService{
     }
 
 
-
     @Override
-    public void join(MemberVO member) {
+    public boolean join(MemberVO member) {
 
         log.info("============= member join service");
-        mapper.insert(member);
+        boolean joinResult = mapper.insert(member)==1;
+        return joinResult;
     }
 
-
+    @Override
+    public boolean modify(MemberVO member) {
+        log.info("============member modify service");
+        boolean updateResult = mapper.update(member) == 1;
+        return updateResult;
+    }
 
 
 }

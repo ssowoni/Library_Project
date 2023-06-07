@@ -169,6 +169,14 @@
         const female = $('#female').val();*/
         const cellNo = $('#cellNo');
 
+        let emailReg = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+        if(!emailReg.test(email.val())){
+            console.log(email.val());
+            alert("이메일 형식에 맞게 입력해주세요.")
+            email.focus();
+            return false;
+        }
+
         //이메일 중복 검사 하지 않은 경우
         if(emailCheck ==0){
             alert('이메일 중복 확인을 해주세요.');
@@ -198,18 +206,38 @@
             return false;
         }
 
+
         if(name.val() =="" ){
             alert("이름을 입력해주세요. ");
             name.focus();
             return false;
         }
 
-        //이메일 중복 검사 하지 않은 경우
+        //let nameReg = /^[가-힣a-zA-Z]{2,6}$/;//한글과 영문을 사용하는 최소 2글자 이상.
+        let nameReg = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,6}$/;
+        if(!nameReg.test(name.val())){
+            console.log(name.val());
+            alert("이름은 최소 2글자 이상 6글자 이하의 한영문자만 가능합니다. ");
+            name.focus();
+            return false;
+        }
+
+        //닉네임 중복 검사 하지 않은 경우
         if(nicknameCheck ==0){
             alert('닉네임 중복 확인을 해주세요.');
             nickname.focus();
             return false; //아래 코드부터 아무것도 진행하지 말아라.
         }
+
+        let nicknameReg =  /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,15}$/;//한글과 영문을 사용하는 최소 2글자 이상.
+        if(!nicknameReg.test(nickname.val())){
+            console.log(nickname.val());
+            alert("닉네임은 최소 2글자 이상 15글자 이하의 한영문자만 가능합니다. ");
+            name.focus();
+            return false;
+        }
+
+
 
         if(cellNo.val()==""){
             alert("전화번호를 입력해주세요. ");
@@ -217,11 +245,22 @@
             return false;
         }
 
-        let cellNoReg = /^[0-9]+/g; //숫자만 입력하는 정규식
+/*        let cellNoReg =  /^[0-9]+/g; //숫자만 입력하는 정규식
         if(!cellNoReg.test(cellNo.val())){
+            console.log(cellNo.val());
+
             alert("전화번호는 숫자만 입력할 수 있습니다.")
             cellNo.focus();
             return false;
+        }*/
+
+        if(isNaN(cellNo.val())){
+            console.log(cellNo.val());
+
+            alert("전화번호는 숫자만 입력할 수 있습니다.")
+            cellNo.focus();
+            return false;
+
         }
 
         document.join_form.submit(); //유효성 검사를 모두 통과했으면 회원가입.

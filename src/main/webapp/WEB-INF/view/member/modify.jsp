@@ -55,7 +55,7 @@
 </script>
 <body class="text-center">
 <main class="form-signin w-100 m-auto">
-    <form name="join_form" action="/join" method="post">
+    <form name="modify_form" action="/modify" method="post">
         <img class="mb-4" src="assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"
              onclick="location.href='/'">
         <h1 class="h3 mb-3 fw-normal">Please join in</h1>

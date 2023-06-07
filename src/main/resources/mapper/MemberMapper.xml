@@ -28,5 +28,14 @@
 
     </insert>
 
+    <update id="update">
+        update member set
+            password = #{password},
+            nickname = #{nickname},
+            cellNo = #{cellNo}
+        where email = #{email}
+
+    </update>
+
 
 </mapper>

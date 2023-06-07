@@ -15,5 +15,8 @@ public interface MemberMapper {
 
     //회원 가입
     public int insert(MemberVO member);
+
+    //회원 수정
+    public int update(MemberVO member);
         
 }
