@@ -5,6 +5,7 @@ import com.wish.library.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -44,6 +45,7 @@ public class MemberController {
         if(loginMember == null){
             return "redirect:/login";
         }
+        session.setAttribute("email", loginMember.getEmail());
         session.setAttribute("nickname", loginMember.getNickname());
         //redirect는 경로로 설정
         return "redirect:/";
@@ -74,8 +76,8 @@ public class MemberController {
 
     //회원 정보를 수정하려면 회원 아이디를 넘겨 받아야됨.
     @GetMapping("/modify")
-    public String modifyForm() {
-        //service.check();
+    public String modifyForm(HttpSession session, Model model) {
+         model.addAttribute("member", service.get((String)session.getAttribute("email")));
          return "/member/modify";
      }
 
@@ -97,12 +99,12 @@ public class MemberController {
      *    MemberVO를 파라미터로 받는게 맞을지
      *    아니면 이메일 체크, 닉네임 체크 메서드를 2개 만들어서 각각 파라미터 하나씩 받고 쿼리도 각각 만드는 게 좋을지...
      */
-    @GetMapping("/duplicationCheck")
+    @GetMapping("/getEmail")
     @ResponseBody
-    public int duplicationCheck(MemberVO member){
-        log.info("==========duplication Check member={}", member);
+    public int getEmail(String email){
+        log.info("==========duplication EmailCheck member={}", email);
 
-        MemberVO findMember = service.check(member);
+        MemberVO findMember = service.get(email);
         if(findMember == null){
             //사용자가 입력한 이메일과 동일한 이메일 or 닉네임이 없는 경우.
             //조회된 값이 0이라는 의미.
@@ -111,6 +113,22 @@ public class MemberController {
         //이메일이나 닉네임이 있는경우
         return  1;
     }
+
+    @GetMapping("/getNickname")
+    @ResponseBody
+    public int getNickname(String nickname){
+        log.info("==========duplication NicknameCheck member={}", nickname);
+
+        MemberVO findMember = service.get(nickname);
+        if(findMember == null){
+            //사용자가 입력한 이메일과 동일한 이메일 or 닉네임이 없는 경우.
+            //조회된 값이 0이라는 의미.
+            return 0;
+        }
+        //이메일이나 닉네임이 있는경우
+        return  1;
+    }
+
 
 
 

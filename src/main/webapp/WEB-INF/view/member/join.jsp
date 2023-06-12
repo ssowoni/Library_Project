@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
+
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
 <head>
@@ -11,14 +12,13 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.111.3">
-    <title>Signin Template · Bootstrap v5.3</title>
+    <title>회원가입</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
-
-    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/dist/css/sign-in.css" rel="stylesheet">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <jsp:include page="../includes/common_includes.jsp"></jsp:include>
+
     <script type="text/javascript" src="assets/dist/commonAjax.js"></script>
     <script type="text/javascript" src="assets/dist/js/memberJoinValidation.js"></script>
 
@@ -51,11 +51,10 @@
 </head>
 <script>
 
-
 </script>
 <body class="text-center">
 <main class="form-signin w-100 m-auto">
-    <form name="join_form" action="/join" method="post">
+    <form  name="join_form" action="/join" method="post">
         <img class="mb-4" src="assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"
              onclick="location.href='/'">
         <h1 class="h3 mb-3 fw-normal">Please join in</h1>
@@ -106,7 +105,7 @@
             </label>
         </div>
         <button class="w-50 btn btn-lg btn-dark" type="button" onclick="history.back();" >이전페이지로가기</button>
-        <button class="w-50 btn btn-lg btn-primary" type="button" name="btn" id="btnJoin" >Sign up</button>
+        <button class="w-50 btn btn-lg btn-primary" type="button" name="btn" id="btnSingUp" >Sign up</button>
     </form>
 </main>
 

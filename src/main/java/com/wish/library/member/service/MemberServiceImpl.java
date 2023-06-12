@@ -43,6 +43,21 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
+    public MemberVO get(String param) {
+        log.info("============= member get service");
+        MemberVO readMember = mapper.read(param);
+        if(readMember !=null){
+            return readMember;
+        }
+        return null;
+    }
+
+
+
+
+
+
+    /*@Override
     public MemberVO check(MemberVO member){
         log.info("============= member checkNickname service");
         MemberVO readMember = mapper.duplicationCheck(member);
@@ -50,7 +65,29 @@ public class MemberServiceImpl implements MemberService{
                 return readMember;
         }
         return null;
+    }*/
+
+    //회원 정보 조회, 회원가입 이메일 중복 검사
+/*    @Override
+    public MemberVO getEmail(String email){
+        log.info("============= member getEmail service");
+        MemberVO readMember = mapper.readEmail(email);
+        if(readMember !=null){
+            return readMember;
+        }
+        return null;
     }
+
+    //회원가입 시 닉네임 중복 검사
+    @Override
+    public MemberVO getNickname(String nickname){
+        log.info("============= member getEmail service");
+        MemberVO readMember = mapper.readNickname(nickname);
+        if(readMember !=null){
+            return readMember;
+        }
+        return null;
+    }*/
 
 
     @Override

@@ -9,16 +9,16 @@
         select *
         from member
         where email = #{email}
+        or nickname= #{nickname}
 
     </select>
 
-    <select id="duplicationCheck" resultType="MemberVO">
+<!--    <select id="readNickname" resultType="MemberVO">
         select *
         from member
-        where email = #{email}
-            or nickname = #{nickname}
+        where nickname = #{nickname}
 
-    </select>
+    </select>-->
 
 
     <insert id="insert">
