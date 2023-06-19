@@ -29,6 +29,7 @@ public class MemberServiceImpl implements MemberService{
         return null;
     }*/
 
+    @Override
     public MemberVO login(String email, String password){
         log.info("============= member login service");
         MemberVO readMember = mapper.read(email);

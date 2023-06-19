@@ -112,7 +112,7 @@
 
         const email = $('#email');
 
-
+        //(알파벳,숫자)@(알파벳,숫자).(알파벳,숫자)
         let emailReg = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
         if(!emailReg.test(email.val())){
             console.log(email.val());
@@ -144,7 +144,7 @@
             return false;
         }
 
-        let pwReg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
+        let pwReg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/;
         if(!pwReg.test(password.val())){
             console.log(password.val());
             alert("비밀번호는 영문 숫자 특수기호 조합 8자리 이상입니다.");
