@@ -4,6 +4,9 @@ import com.wish.library.member.domain.MemberVO;
 import com.wish.library.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,11 +20,6 @@ import javax.servlet.http.HttpSession;
 public class MemberController {
 
     private final MemberService service;
-
-    @GetMapping("/login")
-    public String loginForm(){
-        return "/member/login";
-    }
 
     /*@PostMapping("/login")
     public String login(@RequestParam("email") String email, @RequestParam(value = "password") String pw
@@ -37,7 +35,30 @@ public class MemberController {
         return "redirect:/";
     }*/
 
-     @PostMapping("/login")
+
+    @GetMapping("/")
+    public String home(Model model){
+        //인증된 사용자의
+        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        log.info("index page, security 조회 email : " + email);
+        MemberVO memberVO = service.get(email);
+        memberVO.setPassword(null);
+        model.addAttribute("member", memberVO);
+        return "index";
+    }
+
+    @GetMapping("/login")
+    public String loginForm(){
+        //로그인 되지 않은 상태이면 로그인 페이지를, 로그인 된 상태라면 /index를 보여준다.
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        log.info("로그인 정보 : " + authentication.toString());
+        if(authentication instanceof AnonymousAuthenticationToken)
+            return "/member/login";
+        return "redirect:/";
+    }
+
+
+/*     @PostMapping("/login")
     public String login(@RequestParam("email") String email, String password , HttpSession session){
 
         MemberVO loginMember = service.login(email, password);
@@ -49,14 +70,14 @@ public class MemberController {
         session.setAttribute("nickname", loginMember.getNickname());
         //redirect는 경로로 설정
         return "redirect:/";
-    }
-
+    }*/
+/*
     @PostMapping("/logout")
     public String logout(HttpSession session){
         session.invalidate();
         log.info("로그아웃");
         return "redirect:/";
-    }
+    }*/
 
 
     @GetMapping("/join")
@@ -75,11 +96,22 @@ public class MemberController {
     }
 
     //회원 정보를 수정하려면 회원 아이디를 넘겨 받아야됨.
-    @GetMapping("/modify")
+    //아래 방식은 세션을 이용한 방식
+/*    @GetMapping("/modify")
     public String modifyForm(HttpSession session, Model model) {
          model.addAttribute("member", service.get((String)session.getAttribute("email")));
          return "/member/modify";
-     }
+     }*/
+
+    @GetMapping("/modify")
+    public String modifyForm(Model model){
+        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        log.info("modify page, security 조회 email : " + email);
+        MemberVO member = service.get(email);
+        model.addAttribute("member", member);
+        return "/member/modify";
+
+    }
 
     @PostMapping("/modify")
     public String modify(@ModelAttribute MemberVO member, RedirectAttributes rttr){

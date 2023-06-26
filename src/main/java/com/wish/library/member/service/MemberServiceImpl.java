@@ -4,6 +4,9 @@ import com.wish.library.member.domain.MemberVO;
 import com.wish.library.member.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Member;
@@ -14,6 +17,8 @@ import java.lang.reflect.Member;
 public class MemberServiceImpl implements MemberService{
 
     private final MemberMapper mapper;
+
+    private  final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 /*    @Override
     public MemberVO login(String email,String pw) {
@@ -95,6 +100,7 @@ public class MemberServiceImpl implements MemberService{
     public boolean join(MemberVO member) {
 
         log.info("============= member join service");
+        member.setPassword(passwordEncoder.encode(member.getPassword()));
         boolean joinResult = mapper.insert(member)==1;
         return joinResult;
     }
@@ -102,9 +108,14 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public boolean modify(MemberVO member) {
         log.info("============member modify service");
+        member.setPassword(passwordEncoder.encode(member.getPassword()));
         boolean updateResult = mapper.update(member) == 1;
         return updateResult;
     }
 
+
+    public PasswordEncoder passwordEncoder() {
+        return this.passwordEncoder;
+    }
 
 }

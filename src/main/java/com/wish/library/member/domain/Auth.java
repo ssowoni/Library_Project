@@ -1,7 +1,7 @@
 package com.wish.library.member.domain;
 
 public enum Auth {
-    A("admin"),M("member");
+    A("ADMIN"),M("MEMBER");
 
     final private String auth;
 

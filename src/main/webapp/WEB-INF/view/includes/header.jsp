@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 
 <!doctype html>
@@ -149,7 +150,13 @@
                 </form>
 
                 <div class="text-end">
-                    <c:choose>
+
+                <sec:authorize access="isAnonymous()">
+                    <button type="button" class="btn btn-outline-light me-2" onclick="location.href='/login'">Login</button>
+                    <button type="button" class="btn btn-warning" onclick="location.href='/join'">Sign-up</button>
+                </sec:authorize>
+                <sec:authorize
+                   <%-- <c:choose>
                         <c:when test="${sessionScope.nickname eq null}">
                             <button type="button" class="btn btn-outline-light me-2" onclick="location.href='/login'">Login</button>
                             <button type="button" class="btn btn-warning" onclick="location.href='/join'">Sign-up</button>
@@ -158,11 +165,11 @@
                             ${nickname}님
                             <button type="button" class="btn btn-warning" onclick="location.href='/modify'">MyPage</button>
 
-                            <%--   <a href="">
+                            &lt;%&ndash;   <a href="">
                                    <img src="assets/dist/mypage.png" >
-                               </a>--%>
+                               </a>&ndash;%&gt;
 
-                            <%--<div class="dropdown text-end">
+                            &lt;%&ndash;<div class="dropdown text-end">
                                 <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="assets/dist/mypage.png" alt="mdo" width="32" height="32" class="rounded-circle">
                                 </a>
@@ -174,14 +181,15 @@
                                     <!-- javascript:void(0)는 페이지 이동 없이 아무 일도 하지 말라는 의미. -->
                                     <li><a class="dropdown-item" href="javascript:void(0)" onclick="javascript:fSignOut()">Sign out</a></li>
                                 </ul>
-                            </div>--%>
+                            </div>&ndash;%&gt;
 
 
                             <form action="/logout" method="post">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                 <button type="submit" class="btn btn-outline-light me-2" >Logout</button>
                             </form>
                         </c:otherwise>
-                    </c:choose>
+                    </c:choose>--%>
 
                 </div>
             </div>

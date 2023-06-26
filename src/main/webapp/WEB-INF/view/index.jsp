@@ -5,7 +5,7 @@
 
 <body>
 
-<h1>${nickname}님, 환영합니다.</h1>
+<h1>${member.nickname}님, 환영합니다.</h1>
 
 
 <%@include file="./includes/footer.jsp" %>
