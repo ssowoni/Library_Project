@@ -40,10 +40,13 @@ public class MemberController {
     public String home(Model model){
         //인증된 사용자의
         String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        log.info("index page, security 조회 email : " + email);
-        MemberVO memberVO = service.get(email);
-        memberVO.setPassword(null);
-        model.addAttribute("member", memberVO);
+        if(!(email.equals("anonymousUser"))){
+            log.info("index page, security 조회 email : " + email);
+            MemberVO memberVO = service.get(email);
+            memberVO.setPassword(null);
+            model.addAttribute("member", memberVO);
+        }
+
         return "index";
     }
 

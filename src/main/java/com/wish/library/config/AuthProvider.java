@@ -4,6 +4,7 @@ import com.wish.library.member.domain.MemberVO;
 import com.wish.library.member.service.MemberService;
 import com.wish.library.member.service.MemberServiceImpl;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,6 +21,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class AuthProvider implements AuthenticationProvider {
 
     private final MemberServiceImpl service;
@@ -29,10 +31,12 @@ public class AuthProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String email = (String) authentication.getPrincipal(); // 로그인 창에 입력한 email
         String password = (String) authentication.getCredentials(); //로그인 창에 입력한 password
+        log.info("입력받은 email, password={},{}", email,password);
 
         PasswordEncoder passwordEncoder = service.passwordEncoder();
         UsernamePasswordAuthenticationToken token;
-        MemberVO memberVO = service.get(email);
+        MemberVO memberVO = service.getMemberByEmail(email);
+        log.info("로그인 시 조회해온 정보"+ memberVO);
 
         if (memberVO != null && passwordEncoder.matches(password, memberVO.getPassword())) {
             List<GrantedAuthority> rolse = new ArrayList<>();

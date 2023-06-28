@@ -5,8 +5,9 @@ import com.wish.library.member.domain.MemberVO;
 public interface MemberService {
 
     //public MemberVO login(String email, String pw); //로그인
-    public MemberVO login(String email, String password);
+    //public MemberVO login(String email, String password);
 
+    MemberVO getMemberByEmail(String email);
     public MemberVO get(String param);
 
 /*    public MemberVO getNickname(String nickname);*/

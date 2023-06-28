@@ -16,6 +16,7 @@ public class SecurityConfig {
 
         //권한에 따라 허용하는 url 설정
         http.authorizeRequests()
+                .antMatchers("/assets/**").permitAll()
                 .antMatchers("/","/login","/join").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/member/**").hasRole("MEMBER")

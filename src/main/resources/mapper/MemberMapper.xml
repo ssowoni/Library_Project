@@ -5,6 +5,14 @@
 <mapper namespace="com.wish.library.member.mapper.MemberMapper">
 
 
+    <select id="readByEmail" resultType="MemberVO">
+        select *
+        from member
+        where email = #{email}
+
+    </select>
+
+
     <select id="read" resultType="MemberVO">
         select *
         from member

@@ -84,7 +84,7 @@
             </label>
         </div>
         <button class="w-50 btn btn-lg btn-primary" type="submit">Sign in</button>
-        <button class="w-50 btn btn-lg btn-light" onclick="location.href='join'">Sign uo</button>
+        <button class="w-50 btn btn-lg btn-light" onclick="location.href='/join'">Sign up</button>
     </form>
 </main>
 

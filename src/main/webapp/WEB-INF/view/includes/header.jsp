@@ -155,7 +155,14 @@
                     <button type="button" class="btn btn-outline-light me-2" onclick="location.href='/login'">Login</button>
                     <button type="button" class="btn btn-warning" onclick="location.href='/join'">Sign-up</button>
                 </sec:authorize>
-                <sec:authorize
+                <sec:authorize access="hasRole('MEMBER')">
+                    ${nickname}님
+                    <button type="button" class="btn btn-warning" onclick="location.href='/modify'">MyPage</button>
+                    <form action="/logout" method="post">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                        <button type="submit" class="btn btn-outline-light me-2" >Logout</button>
+                    </form>
+                </sec:authorize>
                    <%-- <c:choose>
                         <c:when test="${sessionScope.nickname eq null}">
                             <button type="button" class="btn btn-outline-light me-2" onclick="location.href='/login'">Login</button>

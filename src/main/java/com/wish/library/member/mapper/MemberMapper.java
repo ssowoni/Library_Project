@@ -8,8 +8,9 @@ import org.apache.ibatis.annotations.Mapper;
 public interface MemberMapper {
 
     //회원 정보 조회
-    public MemberVO read(String email);
+    public MemberVO read(String param);
 
+    public MemberVO readByEmail(String email);
     //닉네임으로 회원정보 조회
    /* MemberVO readNickname(String nickname);*/
 

@@ -34,7 +34,7 @@ public class MemberServiceImpl implements MemberService{
         return null;
     }*/
 
-    @Override
+ /*   @Override
     public MemberVO login(String email, String password){
         log.info("============= member login service");
         MemberVO readMember = mapper.read(email);
@@ -44,6 +44,16 @@ public class MemberServiceImpl implements MemberService{
             if(readMember.getPassword().equals(password)){
                 return readMember;
             }
+        }
+        return null;
+    }*/
+
+    @Override
+    public MemberVO getMemberByEmail(String email){
+        log.info("==============member get service from email");
+        MemberVO readMember = mapper.readByEmail(email);
+        if(readMember !=null){
+            return readMember;
         }
         return null;
     }
